@@ -4,18 +4,16 @@ import { useState } from "react";
 import { Button } from "@/src/components/ui/button";
 
 export default function Counter() {
-  const [count, setCount] = useState<number>(0);
+  const [count, setCount] = useState(0);
 
   const step = 1;
 
   const handleIncrement = () => {
-    const newCount = count + step;
-    setCount(newCount);
+    setCount((prev) => prev + step);
   };
 
   const handleDecrement = () => {
-    const newCount = count - step;
-    setCount(newCount);
+    setCount((prev) => prev - step);
   };
 
   const handleReset = () => {
