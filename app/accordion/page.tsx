@@ -42,7 +42,7 @@ export default function Page() {
         </header>
 
         <main>
-          <Accordion items={accordionItems} defaultOpenId="1" />
+          <Accordion items={accordionItems} defaultOpenIds={["1"]} />
         </main>
 
         <section className="mt-16">
@@ -56,8 +56,8 @@ export default function Page() {
           </header>
           <Accordion
             items={accordionItems}
-            allowMultiple={true}
-            defaultOpenId={["2", "4"]}
+            multiple
+            defaultOpenIds={["2", "4"]}
           />
         </section>
       </div>

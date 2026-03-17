@@ -1,91 +1,107 @@
 "use client";
 
-import React, { useState } from "react";
-import { AccordionItemData } from "@/src/types/interface"; 
-// import { ChevronDownIcon } from './icons';
+import React, { useState, memo } from "react";
+import { AccordionItemData } from "@/src/types/interface";
+import { ChevronDown, ChevronUp } from "lucide-react";
 
-// interface AccordionItemProps extends React.PropsWithChildren {
-// interface AccordionItemProps extends React.HTMLAttributes<HTMLElement> {
-interface AccordionItemProps {
+interface AccordionItemProps extends Omit<
+  React.ButtonHTMLAttributes<HTMLButtonElement>,
+  "onClick"
+> {
   item: AccordionItemData;
   isOpen: boolean;
-  onClick: () => void;
+  onToggle: () => void;
 }
 
-// Define AccordionItem outside the main Accordion component to prevent re-creation on every render.
-const AccordionItem = ({ item, isOpen, onClick }: AccordionItemProps) => {
-  return (
-    <div className="border-b border-gray-200 dark:border-gray-700 last:border-b-0">
-      <h2>
-        <button
-          type="button"
-          className="flex items-center justify-between w-full p-5 font-medium text-left text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-800 transition-colors duration-200"
-          onClick={onClick}
-          aria-expanded={isOpen}
-          aria-controls={`accordion-content-${item.id}`}
+const AccordionItem = memo(
+  ({
+    item,
+    isOpen,
+    onToggle,
+    className,
+    ...buttonProps
+  }: AccordionItemProps) => {
+    const contentId = `accordion-content-${item.id}`;
+    const headingId = `accordion-header-${item.id}`;
+
+    return (
+      <div className="border-b border-gray-200 dark:border-gray-700 last:border-b-0">
+        <h2 id={headingId}>
+          <button
+            type="button"
+            className={`flex items-center justify-between w-full p-5 font-medium text-left text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-800 transition-colors duration-200 ${className ?? ""}`}
+            onClick={onToggle}
+            aria-expanded={isOpen}
+            aria-controls={contentId}
+            {...buttonProps}
+          >
+            <span>{item.title}</span>
+            {isOpen ? <ChevronDown /> : <ChevronUp /> }
+          </button>
+        </h2>
+        <div
+          id={contentId}
+          role="region"
+          aria-labelledby={headingId}
+          className={`grid transition-all duration-300 ease-in-out ${
+            isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+          }`}
         >
-          <span>{item.title}</span>
-          {/* <ChevronDownIcon
-            className={`w-6 h-6 shrink-0 transition-transform duration-300 ease-in-out ${isOpen ? 'rotate-180' : ''}`}
-          /> */}
-        </button>
-      </h2>
-      <div
-        id={`accordion-content-${item.id}`}
-        className={`grid transition-all duration-300 ease-in-out ${
-          isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
-        }`}
-      >
-        <div className="overflow-hidden">
-          <div className="p-5 text-gray-600 dark:text-gray-400">
-            {item.content}
+          <div className="overflow-hidden">
+            <div className="p-5 text-gray-600 dark:text-gray-400">
+              {item.content}
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  );
-};
+    );
+  },
+);
+
+AccordionItem.displayName = "AccordionItem";
 
 interface AccordionProps {
   items: AccordionItemData[];
-  allowMultiple?: boolean;
-  defaultOpenId?: string | string[];
+  multiple?: boolean;
+  defaultOpenIds?: string[];
+  id?: string;
+  className?: string;
 }
 
 const Accordion = ({
   items,
-  allowMultiple = false,
-  defaultOpenId,
+  multiple = false,
+  defaultOpenIds = [],
+  id,
+  className,
 }: AccordionProps) => {
-  const [openItemIds, setOpenItemIds] = useState<string[]>(() => {
-    if (!defaultOpenId) return [];
-    return Array.isArray(defaultOpenId) ? defaultOpenId : [defaultOpenId];
-  });
+  const [openItemIds, setOpenItemIds] = useState<string[]>(defaultOpenIds);
 
   const handleToggle = (id: string) => {
     setOpenItemIds((prevIds) => {
       const isCurrentlyOpen = prevIds.includes(id);
-      if (allowMultiple) {
+
+      if (multiple) {
         return isCurrentlyOpen
           ? prevIds.filter((itemId) => itemId !== id)
           : [...prevIds, id];
-      } else {
-        return isCurrentlyOpen ? [] : [id];
       }
+
+      return isCurrentlyOpen ? [] : [id];
     });
   };
 
   return (
     <div
-      id="accordion-wrapper"
-      className="w-full max-w-2xl mx-auto bg-white dark:bg-gray-900 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700"
+      id={id}
+      className={`w-full max-w-2xl mx-auto bg-white dark:bg-gray-900 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 ${className ?? ""}`}
     >
       {items.map((item) => (
         <AccordionItem
           key={item.id}
           item={item}
           isOpen={openItemIds.includes(item.id)}
-          onClick={() => handleToggle(item.id)}
+          onToggle={() => handleToggle(item.id)}
         />
       ))}
     </div>
