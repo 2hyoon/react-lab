@@ -18,24 +18,23 @@ interface ThemeProviderProps {
   children: React.ReactNode;
 }
 
-export const ThemeProvider = ({ children }: ThemeProviderProps) => {  
-  const [theme, setTheme] = useState<Theme>(() => {
-    // During SSR, `window` is not available; default to light.
-    if (typeof window === "undefined") {
-      return Theme.LIGHT;
-    }
+export const ThemeProvider = ({ children }: ThemeProviderProps) => {
+  // Always start with LIGHT so server and client first paint match (avoids hydration error).
+  const [theme, setTheme] = useState<Theme>(Theme.LIGHT);
 
+  // After mount, sync theme from localStorage or system preference.
+  useEffect(() => {
     const storedTheme = window.localStorage.getItem("theme") as Theme | null;
     if (storedTheme === Theme.DARK || storedTheme === Theme.LIGHT) {
-      return storedTheme;
+      setTheme(storedTheme);
+      return;
     }
-
     const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    return prefersDark ? Theme.DARK : Theme.LIGHT;
-  });
+    setTheme(prefersDark ? Theme.DARK : Theme.LIGHT);
+  }, []);
 
-  useEffect(() => { 
-    const root = window.document.body; 
+  useEffect(() => {
+    const root = window.document.body;
 
     if (theme === Theme.DARK) {
       root.classList.add("dark");
