@@ -1,19 +1,26 @@
 "use client";
 
-// import { useRef } from "react";
+import type { HTMLAttributes } from "react";
 
-interface DisplayProps extends React.HTMLAttributes<HTMLElement> {
+interface DisplayProps extends HTMLAttributes<HTMLDivElement> {
   value: string;
 }
 
-const CalculatorDisplay = ({ value }: DisplayProps) => {
-  // const [scale, setScale] = useState(1);
-  // const displayRef = useRef<HTMLDivElement>(null);
-
+const CalculatorDisplay = ({
+  value,
+  className = "font-bold text-2xl text-center py-4",
+  ...props
+}: DisplayProps) => {
   return (
-    <div>
-      {/* <div ref={displayRef}>{value}</div> */}
-      <div>{value}</div>
+    <div
+      {...props}
+      role="status"
+      aria-live={value === "Error" ? "assertive" : "polite"}
+      aria-atomic="true"
+      aria-label="Calculator result"
+      className={className}
+    >
+      {value}
     </div>
   );
 };

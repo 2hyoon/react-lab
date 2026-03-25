@@ -8,16 +8,16 @@ import { usePathname } from "next/navigation";
 const links = [
   { name: "Home", href: "/" },
   {
-    name: "Counter",
-    href: "/counter",
-  },
-  {
     name: "Accordion",
     href: "/accordion",
   },
   {
     name: "Calculator",
     href: "/calculator",
+  },
+  {
+    name: "Counter",
+    href: "/counter",
   },
 ];
 
