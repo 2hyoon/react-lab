@@ -36,7 +36,7 @@ const AccordionItem = memo(
             {...buttonProps}
           >
             <span>{item.title}</span>
-            {isOpen ? <ChevronDown /> : <ChevronUp /> }
+            {isOpen ? <ChevronUp /> : <ChevronDown />}
           </button>
         </h2>
         <div
