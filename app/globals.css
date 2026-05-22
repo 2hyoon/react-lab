@@ -1,9 +1,9 @@
 @import "tailwindcss";
 
 @theme inline {
-  --font-sans: var(--font-space-mono), ui-sans-serif, system-ui, sans-serif;
-  --font-serif: var(--font-space-mono), ui-serif, serif;
-  --font-mono: var(--font-space-mono), ui-monospace, monospace;
+  --font-sans: var(--font-gaist-mono), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-gaist-mono), ui-serif, serif;
+  --font-mono: var(--font-gaist-mono), ui-monospace, monospace;
 }
 
 #aside {

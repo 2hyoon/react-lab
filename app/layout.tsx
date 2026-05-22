@@ -1,15 +1,15 @@
 "use client";
-import { Space_Mono } from "next/font/google";
+import { Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Nav from "@/src/components/layout/nav";
 import Header from "@/src/components/layout/header";
 import { ThemeProvider } from "@/src/hooks/themeContext";
 import { useState } from "react";
 
-const spaceMono = Space_Mono({
+const gaistMono = Geist_Mono({
   subsets: ["latin"],
-  weight: ["400", "700"],
-  variable: "--font-space-mono",
+  weight: ["100", "200", "400", "700"],
+  variable: "--font-gaist-mono",
 });
 
 export default function RootLayout({
@@ -24,10 +24,10 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="en" className={spaceMono.variable}>
+    <html lang="en" className={gaistMono.variable}>
       <ThemeProvider>
         <body
-          className="antialiased bg-gray-900 font-sans"
+          className="antialiased bg-black font-sans"
           data-sidebar={isNavOpen ? "true" : "false"}
         >
           <Header onToggleNav={toggleNav} isOpen={isNavOpen} />
