@@ -9,15 +9,15 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ children, variant = "primary", className = "", ...props }, ref) => {
     const baseStyles =
-      "inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-[#0f172a] disabled:opacity-50 disabled:cursor-not-allowed";
+      "inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-background disabled:opacity-50 disabled:cursor-not-allowed";
 
     const variants = {
       primary:
-        "bg-blue-600 hover:bg-blue-500 text-white shadow-lg shadow-blue-500/20 focus:ring-blue-500",
+        "bg-primary hover:bg-primary-hover text-white shadow-lg shadow-primary/20 focus:ring-primary",
       secondary:
-        "bg-slate-700 hover:bg-slate-600 text-slate-100 focus:ring-slate-500",
+        "bg-surface hover:bg-surface-hover text-foreground focus:ring-muted",
       danger:
-        "bg-red-500/10 hover:bg-red-500/20 text-red-400 hover:text-red-300 border border-red-500/20 focus:ring-red-500",
+        "bg-danger/10 hover:bg-danger/20 text-danger border border-danger/20 focus:ring-danger",
     };
 
     return (

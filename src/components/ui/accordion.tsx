@@ -25,11 +25,11 @@ const AccordionItem = memo(
     const headingId = `accordion-header-${item.id}`;
 
     return (
-      <div className="border-b border-gray-200 dark:border-gray-700 last:border-b-0">
+      <div className="border-b border-border last:border-b-0">
         <h2 id={headingId}>
           <button
             type="button"
-            className={`flex items-center justify-between w-full p-5 font-medium text-left text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-800 transition-colors duration-200 ${className ?? ""}`}
+            className={`flex items-center justify-between w-full p-5 font-medium text-left text-foreground hover:bg-surface-hover focus:outline-none focus:ring-2 focus:ring-primary transition-colors duration-200 ${className ?? ""}`}
             onClick={onToggle}
             aria-expanded={isOpen}
             aria-controls={contentId}
@@ -48,7 +48,7 @@ const AccordionItem = memo(
           }`}
         >
           <div className="overflow-hidden">
-            <div className="p-5 text-gray-600 dark:text-gray-400">
+            <div className="p-5 text-muted">
               {item.content}
             </div>
           </div>
@@ -94,7 +94,7 @@ const Accordion = ({
   return (
     <div
       id={id}
-      className={`w-full max-w-2xl mx-auto bg-white dark:bg-gray-900 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 ${className ?? ""}`}
+      className={`w-full max-w-2xl mx-auto bg-surface rounded-lg shadow-lg border border-border ${className ?? ""}`}
     >
       {items.map((item) => (
         <AccordionItem

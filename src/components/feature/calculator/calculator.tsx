@@ -127,119 +127,119 @@ const Calculator = () => {
           label="AC"
           aria-label="Clear all"
           onClick={() => dispatch({ type: "CLEAR_ALL" })}
-          className="bg-gray-500 text-white"
+          className="bg-surface-2 text-foreground"
         />
         <CalculatorButton
           label="+/-"
           aria-label="Toggle sign"
           onClick={() => dispatch({ type: "TOGGLE_SIGN" })}
-          className="bg-gray-500 text-white"
+          className="bg-surface-2 text-foreground"
         />
         <CalculatorButton
           label="%"
           aria-label="Percent"
           onClick={() => dispatch({ type: "INPUT_PERCENT" })}
-          className="bg-gray-500 text-white"
+          className="bg-surface-2 text-foreground"
         />
         <CalculatorButton
           label="/"
           aria-label="Divide"
           onClick={() => dispatch({ type: "PERFORM_OPERATION", operator: "/" })}
-          className="bg-amber-600 text-white"
+          className="bg-accent text-white"
         />
 
         <CalculatorButton
           label="7"
           aria-label="7"
           onClick={() => dispatch({ type: "INPUT_DIGIT", digit: "7" })}
-          className="bg-gray-700 text-white"
+          className="bg-surface text-foreground"
         />
         <CalculatorButton
           label="8"
           aria-label="8"
           onClick={() => dispatch({ type: "INPUT_DIGIT", digit: "8" })}
-          className="bg-gray-700 text-white"
+          className="bg-surface text-foreground"
         />
         <CalculatorButton
           label="9"
           aria-label="9"
           onClick={() => dispatch({ type: "INPUT_DIGIT", digit: "9" })}
-          className="bg-gray-700 text-white"
+          className="bg-surface text-foreground"
         />
         <CalculatorButton
           label="*"
           aria-label="Multiply"
           onClick={() => dispatch({ type: "PERFORM_OPERATION", operator: "*" })}
-          className="bg-amber-600 text-white"
+          className="bg-accent text-white"
         />
 
         <CalculatorButton
           label="4"
           aria-label="4"
           onClick={() => dispatch({ type: "INPUT_DIGIT", digit: "4" })}
-          className="bg-gray-700 text-white"
+          className="bg-surface text-foreground"
         />
         <CalculatorButton
           label="5"
           aria-label="5"
           onClick={() => dispatch({ type: "INPUT_DIGIT", digit: "5" })}
-          className="bg-gray-700 text-white"
+          className="bg-surface text-foreground"
         />
         <CalculatorButton
           label="6"
           aria-label="6"
           onClick={() => dispatch({ type: "INPUT_DIGIT", digit: "6" })}
-          className="bg-gray-700 text-white"
+          className="bg-surface text-foreground"
         />
         <CalculatorButton
           label="-"
           aria-label="Subtract"
           onClick={() => dispatch({ type: "PERFORM_OPERATION", operator: "-" })}
-          className="bg-amber-600 text-white"
+          className="bg-accent text-white"
         />
 
         <CalculatorButton
           label="1"
           aria-label="1"
           onClick={() => dispatch({ type: "INPUT_DIGIT", digit: "1" })}
-          className="bg-gray-700 text-white"
+          className="bg-surface text-foreground"
         />
         <CalculatorButton
           label="2"
           aria-label="2"
           onClick={() => dispatch({ type: "INPUT_DIGIT", digit: "2" })}
-          className="bg-gray-700 text-white"
+          className="bg-surface text-foreground"
         />
         <CalculatorButton
           label="3"
           aria-label="3"
           onClick={() => dispatch({ type: "INPUT_DIGIT", digit: "3" })}
-          className="bg-gray-700 text-white"
+          className="bg-surface text-foreground"
         />
         <CalculatorButton
           label="+"
           aria-label="Add"
           onClick={() => dispatch({ type: "PERFORM_OPERATION", operator: "+" })}
-          className="bg-amber-600 text-white"
+          className="bg-accent text-white"
         />
 
         <CalculatorButton
           label="0"
           aria-label="0"
           onClick={() => dispatch({ type: "INPUT_DIGIT", digit: "0" })}
-          className="col-span-2 min-w-0 bg-gray-700 text-white"
+          className="col-span-2 min-w-0 bg-surface text-foreground"
         />
         <CalculatorButton
           label="."
           aria-label="Decimal point"
           onClick={() => dispatch({ type: "INPUT_DECIMAL" })}
-          className="bg-gray-700 text-white"
+          className="bg-surface text-foreground"
         />
         <CalculatorButton
           label="="
           aria-label="Equals"
           onClick={() => dispatch({ type: "HANDLE_EQUALS" })}
-          className="bg-amber-600 text-white"
+          className="bg-accent text-white"
         />
       </div>
     </div>

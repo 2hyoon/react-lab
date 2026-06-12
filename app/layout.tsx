@@ -27,7 +27,7 @@ export default function RootLayout({
     <html lang="en" className={gaistMono.variable}>
       <ThemeProvider>
         <body
-          className="antialiased bg-black font-sans"
+          className="antialiased font-sans"
           data-sidebar={isNavOpen ? "true" : "false"}
         >
           <Header onToggleNav={toggleNav} isOpen={isNavOpen} />

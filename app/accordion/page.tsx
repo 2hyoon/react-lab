@@ -31,12 +31,12 @@ const accordionItems: AccordionItemData[] = [
 export default function Page() {
   return (
     <section>
-      <div className="min-h-screen bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200 font-sans p-4 sm:p-6 md:p-8">
+      <div className="min-h-screen bg-background text-foreground font-sans p-4 sm:p-6 md:p-8">
         <header className="text-center mb-12">
-          <h1 className="text-4xl sm:text-5xl font-extrabold text-gray-900 dark:text-white mb-2">
+          <h1 className="text-4xl sm:text-5xl font-extrabold text-foreground mb-2">
             React Accordion
           </h1>
-          <p className="text-lg text-gray-600 dark:text-gray-400">
+          <p className="text-lg text-muted">
             A demonstration of a stylish and functional accordion component.
           </p>
         </header>
@@ -47,10 +47,10 @@ export default function Page() {
 
         <section className="mt-16">
           <header className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+            <h2 className="text-3xl font-bold text-foreground mb-2">
               Multiple Open Items
             </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-400">
+            <p className="text-lg text-muted">
               This example allows expanding more than one section at a time.
             </p>
           </header>

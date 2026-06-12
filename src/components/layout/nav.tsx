@@ -29,13 +29,13 @@ export default function Nav({ isOpen }: NavProps) {
   const pathname = usePathname();
 
   return (
-    <div id="aside" className="fixed w-[250px] top-0 left-0 h-dvh lg:relative lg:w-auto lg:col-start-1 lg:row-start-1 bg-gray-900 ">
+    <div id="aside" className="fixed w-[250px] top-0 left-0 h-dvh lg:relative lg:w-auto lg:col-start-1 lg:row-start-1 bg-surface ">
       <div className="absolute inset-0">
-        <div className="sticky top-0 bottom-0 left-0 h-full overflow-y-auto pt-14 border-r border-r-gray-700">
+        <div className="sticky top-0 bottom-0 left-0 h-full overflow-y-auto pt-14 border-r border-r-border">
           <nav id="main-nav" className={isOpen ? `open pl-5 font-mono` : `pl-5 font-mono`}>
             <ul>
               {links.map((link) => (
-                <li key={link.name} className="py-1 text-g">
+                <li key={link.name} className="py-1">
                   <Link
                     href={link.href}
                     // className={clsx(
@@ -43,7 +43,7 @@ export default function Nav({ isOpen }: NavProps) {
                     //   { "bg-sky-100 text-blue-600": pathname === link.href }
                     // )}
                     className={
-                      pathname === link.href ? "text-green-400" : "text-grey-100"
+                      pathname === link.href ? "text-success" : "text-muted"
                     }
                   >
                     {link.name}

@@ -11,7 +11,7 @@ const ThemeButton = () => {
     <button
       onClick={toggleTheme}
       aria-label="Toggle theme"
-      className="fixed top-2.5 right-4 p-1 rounded-full bg-foreground-light dark:bg-foreground-dark hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-300 cursor-pointer"
+      className="fixed top-2.5 right-4 p-1 rounded-full bg-surface hover:bg-surface-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-all duration-300 cursor-pointer"
     >
       {theme === Theme.LIGHT ? (
         <Sun size={20} />

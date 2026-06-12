@@ -22,7 +22,7 @@ export default function Counter() {
 
   return (
     <div className="flex flex-col gap-2 justify-center items-center">
-      <h2 className="text-xl text-gray-400" id="counter-label">
+      <h2 className="text-xl text-muted" id="counter-label">
         Current Count
       </h2>
       <p
