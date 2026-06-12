@@ -33,7 +33,7 @@ export default function Nav({ isOpen }: NavProps) {
       <div className="absolute inset-0">
         <div className="sticky top-0 bottom-0 left-0 h-full overflow-y-auto pt-14 border-r border-r-border">
           <nav id="main-nav" className={isOpen ? `open pl-5 font-mono` : `pl-5 font-mono`}>
-            <ul>
+            <ul className="pt-5">
               {links.map((link) => (
                 <li key={link.name} className="py-1">
                   <Link
