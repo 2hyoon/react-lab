@@ -1,9 +1,9 @@
 "use client";
 import { Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Nav from "@/src/components/layout/nav";
-import Header from "@/src/components/layout/header";
-import { ThemeProvider } from "@/src/hooks/themeContext";
+import Nav from "@/src/components/layout/Nav";
+import Header from "@/src/components/layout/Header";
+import { ThemeProvider } from "@/src/hooks/ThemeContext";
 import { useState } from "react";
 
 const gaistMono = Geist_Mono({

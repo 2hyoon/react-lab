@@ -1,4 +1,4 @@
-import Counter from "@/src/components/ui/counter";
+import Counter from "@/src/components/ui/Counter";
 
 export default function Page() {
   return (

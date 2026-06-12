@@ -1,6 +1,6 @@
 "use client";
 
-import { useTheme } from "@/src/hooks/themeContext";
+import { useTheme } from "@/src/hooks/ThemeContext";
 import { Theme } from "@/src/types/type";
 import { Moon, Sun } from "lucide-react";
 

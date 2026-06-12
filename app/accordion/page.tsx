@@ -1,4 +1,4 @@
-import Accordion from "@/src/components/ui/accordion";
+import Accordion from "@/src/components/ui/Accordion";
 import { AccordionItemData } from "@/src/types/interface";
 
 const accordionItems: AccordionItemData[] = [

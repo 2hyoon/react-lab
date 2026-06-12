@@ -26,6 +26,8 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
   useEffect(() => {
     const storedTheme = window.localStorage.getItem("theme") as Theme | null;
     if (storedTheme === Theme.DARK || storedTheme === Theme.LIGHT) {
+      // SSR theme sync must run after mount, so setState here is intentional.
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setTheme(storedTheme);
       return;
     }

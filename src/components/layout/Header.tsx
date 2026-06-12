@@ -1,6 +1,6 @@
 "use client";
 
-import ThemeButton from "@/src/components/ui/themeButton";
+import ThemeButton from "@/src/components/ui/ThemeButton";
 import { Menu, X } from "lucide-react";
 
 interface HeaderProps {

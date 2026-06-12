@@ -1,8 +1,8 @@
 "use client";
 
 import { useReducer } from "react";
-import CalculatorButton from "@/src/components/feature/calculator/calculatorButton";
-import CalculatorDisplay from "@/src/components/feature/calculator/calculatorDisplay";
+import CalculatorButton from "@/src/components/feature/calculator/CalculatorButton";
+import CalculatorDisplay from "@/src/components/feature/calculator/CalculatorDisplay";
 
 type Operator = "+" | "-" | "*" | "/";
 
