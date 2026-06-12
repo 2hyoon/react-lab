@@ -18,6 +18,8 @@
   --color-accent-hover: var(--accent-hover);
   --color-danger: var(--danger);
   --color-success: var(--success);
+
+  --spacing-header: 3rem;
 }
 
 :root {
@@ -68,6 +70,6 @@ body {
   }
 
   body[data-sidebar="false"] #aside {
-    left: -250px;
+    left: -12.5rem;
   }
 }

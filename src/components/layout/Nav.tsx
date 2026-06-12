@@ -29,7 +29,7 @@ export default function Nav({ isOpen }: NavProps) {
   const pathname = usePathname();
 
   return (
-    <div id="aside" className="fixed w-[250px] top-0 left-0 h-dvh lg:relative lg:w-auto lg:col-start-1 lg:row-start-1 bg-surface ">
+    <div id="aside" className="fixed w-50 top-0 left-0 h-dvh lg:relative lg:w-auto lg:col-start-1 lg:row-start-1 bg-surface ">
       <div className="absolute inset-0">
         <div className="sticky top-0 bottom-0 left-0 h-full overflow-y-auto pt-14 border-r border-r-border">
           <nav id="main-nav" className={isOpen ? `open pl-5 font-mono` : `pl-5 font-mono`}>

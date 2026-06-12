@@ -31,9 +31,9 @@ export default function RootLayout({
           data-sidebar={isNavOpen ? "true" : "false"}
         >
           <Header onToggleNav={toggleNav} isOpen={isNavOpen} />
-          <div className="grid min-h-dvh grid-cols-1 lg:grid-cols-[200px_2.5rem_minmax(0,1fr)_2.5rem]">
+          <div className="grid min-h-dvh grid-cols-1 lg:grid-cols-[12.5rem_minmax(0,1fr)]">
             <Nav isOpen={isNavOpen} />
-            <main className="lg:col-start-3 pt-12">{children}</main>
+            <main className="lg:col-start-2 pt-header px-4">{children}</main>
           </div>
         </body>
       </ThemeProvider>
