@@ -33,7 +33,7 @@ export default function RootLayout({
           <Header onToggleNav={toggleNav} isOpen={isNavOpen} />
           <div className="grid min-h-dvh grid-cols-1 lg:grid-cols-[12.5rem_minmax(0,1fr)]">
             <Nav isOpen={isNavOpen} />
-            <main className="lg:col-start-2 pt-header px-4">{children}</main>
+            <main className="lg:col-start-2 pt-header px-4 lg:px-8">{children}</main>
           </div>
         </body>
       </ThemeProvider>
