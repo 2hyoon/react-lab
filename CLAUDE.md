@@ -49,7 +49,7 @@ src/
 
 ### Styling
 
-Tailwind v4 — no `tailwind.config.ts`. Semantic color tokens are declared via `@theme inline` in `app/globals.css` (e.g. `--color-background`, `--color-surface`, `--color-foreground`, `--color-muted`, `--color-border`, `--color-primary`, `--color-accent`, `--color-danger`, `--color-success`). Each maps to a CSS variable whose value is set in `:root` (light) and overridden in `body.dark` (dark). Use the resulting utilities (`bg-surface`, `text-muted`, etc.) — **do not** use raw palette colors (`bg-gray-700`) or `dark:` variants; theme switching happens entirely through the token values, so components stay theme-agnostic.
+Tailwind v4 — no `tailwind.config.ts`. Semantic color tokens are declared via `@theme inline` in `app/globals.css`: `--color-background`, `--color-surface` (+ `-surface-2`, `-surface-hover`), `--color-foreground`, `--color-muted`, `--color-border`, `--color-primary` (+ `-primary-hover`), `--color-accent` (+ `-accent-hover`), `--color-danger`, `--color-success`. Each maps to a CSS variable whose value is set in `:root` (light) and overridden in `body.dark` (dark). Use the resulting utilities (`bg-surface`, `text-muted`, etc.) — **do not** use raw palette colors (`bg-gray-700`) or `dark:` variants; theme switching happens entirely through the token values, so components stay theme-agnostic.
 
 Font is Geist Mono loaded via `next/font/google`, injected as the `--font-gaist-mono` CSS variable and mapped to all font stacks in `@theme inline`.
 
@@ -66,9 +66,10 @@ Consume with `useTheme()` — throws if used outside the provider.
 
 `app/layout.tsx` is a Client Component (uses `useState` for nav toggle). The page grid is:
 ```
-[200px sidebar] [2.5rem] [main content] [2.5rem]  ← lg breakpoint
-[full-width]                                        ← below lg
+lg:grid-cols-[12.5rem_minmax(0,1fr)]   → [12.5rem sidebar] [fluid main]  ← lg breakpoint
+grid-cols-1                            → [full-width]                    ← below lg
 ```
+`<main>` sits in `col-start-2` and owns its own horizontal padding (`px-4 lg:px-8`) plus a `pt-header` top offset; there are no gutter columns. Header height is tokenized as `--spacing-header: 3rem` (used via the `pt-header` utility).
 
 The sidebar (`#aside`) slides in/out via a CSS `left` transition defined in `globals.css`, triggered by `data-sidebar="true/false"` on `<body>`.
 
