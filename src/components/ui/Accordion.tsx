@@ -26,7 +26,7 @@ const AccordionItem = memo(
 
     return (
       <div className="border-b border-border last:border-b-0">
-        <h2 id={headingId}>
+        <h3 id={headingId}>
           <button
             type="button"
             className={`flex items-center justify-between w-full p-5 font-medium text-left text-foreground hover:bg-surface-hover focus:outline-none focus:ring-2 focus:ring-primary transition-colors duration-200 ${className ?? ""}`}
@@ -38,7 +38,7 @@ const AccordionItem = memo(
             <span>{item.title}</span>
             {isOpen ? <ChevronUp /> : <ChevronDown />}
           </button>
-        </h2>
+        </h3>
         <div
           id={contentId}
           role="region"
@@ -94,7 +94,7 @@ const Accordion = ({
   return (
     <div
       id={id}
-      className={`w-full max-w-2xl mx-auto bg-surface rounded-lg shadow-lg border border-border ${className ?? ""}`}
+      className={`w-full max-w-2xl mx-auto bg-surface rounded-lg border border-border ${className ?? ""}`}
     >
       {items.map((item) => (
         <AccordionItem

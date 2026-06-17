@@ -6,7 +6,7 @@ export default function Page() {
       className="flex flex-col items-center p-8"
       aria-labelledby="calculator-title"
     >
-      <h1 id="calculator-title" className="text-2xl font-bold">
+      <h1 id="calculator-title">
         Calculator
       </h1>
       <Calculator />

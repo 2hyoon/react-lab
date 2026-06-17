@@ -60,6 +60,36 @@ body {
   font-size: 0.875rem; /* 14px base body text; rem keeps user zoom/scale intact */
 }
 
+@layer base {
+  h1 {
+    font-size: 2rem;
+    font-weight: 700;
+  } /* 32px */
+  h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+  } /* 24px */
+  h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+  } /* 20px */
+  h4 {
+    font-size: 1.125rem;
+    font-weight: 700;
+  } /* 18px */
+  h5 {
+    font-size: 1rem;
+    font-weight: 700;
+  } /* 16px */
+  h6 {
+    font-size: 0.875rem;
+    font-weight: 700;
+  } /* 14px */
+  p {
+    font-size: 0.875rem;
+  } /* 14px */
+}
+
 #aside {
   transition: left 0.2s ease-out;
 }

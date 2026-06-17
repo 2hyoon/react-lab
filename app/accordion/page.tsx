@@ -33,10 +33,10 @@ export default function Page() {
     <section>
       <div className="min-h-screen bg-background text-foreground font-sans p-4 sm:p-6 md:p-8">
         <header className="text-center mb-12">
-          <h1 className="text-4xl sm:text-5xl font-extrabold text-foreground mb-2">
+          <h1 className="mb-2">
             React Accordion
           </h1>
-          <p className="text-lg text-muted">
+          <p>
             A demonstration of a stylish and functional accordion component.
           </p>
         </header>
@@ -47,10 +47,10 @@ export default function Page() {
 
         <section className="mt-16">
           <header className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-foreground mb-2">
+            <h2 className="mb-2">
               Multiple Open Items
             </h2>
-            <p className="text-lg text-muted">
+            <p>
               This example allows expanding more than one section at a time.
             </p>
           </header>
