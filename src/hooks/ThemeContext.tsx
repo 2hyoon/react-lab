@@ -1,6 +1,13 @@
 "use client";
 
-import { createContext, useState, useEffect, useContext } from "react";
+import {
+  createContext,
+  useState,
+  useEffect,
+  useContext,
+  useCallback,
+  useMemo,
+} from "react";
 import { Theme } from "@/src/types/type";
 import { ThemeContextType } from "@/src/types/interface";
 
@@ -24,14 +31,18 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
 
   // After mount, sync theme from localStorage or system preference.
   useEffect(() => {
-    const storedTheme = window.localStorage.getItem("theme") as Theme | null;
+    // Left untyped on purpose: the comparison below narrows string | null to Theme,
+    // so an `as Theme` cast here would assert before the value is actually checked.
+    const storedTheme = window.localStorage.getItem("theme");
     if (storedTheme === Theme.DARK || storedTheme === Theme.LIGHT) {
       // SSR theme sync must run after mount, so setState here is intentional.
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setTheme(storedTheme);
       return;
     }
-    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const prefersDark = window.matchMedia(
+      "(prefers-color-scheme: dark)",
+    ).matches;
     setTheme(prefersDark ? Theme.DARK : Theme.LIGHT);
   }, []);
 
@@ -49,15 +60,17 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
     localStorage.setItem("theme", theme);
   }, [theme]);
 
-  const toggleTheme = () => {
+  // The functional update reads no outer value, so deps stay empty and the identity is stable.
+  const toggleTheme = useCallback(() => {
     setTheme((prevTheme) =>
       prevTheme === Theme.LIGHT ? Theme.DARK : Theme.LIGHT,
     );
-  };
+  }, []);
+
+  // Memoized so parent re-renders (RootLayout's nav state) don't wake every consumer.
+  const value = useMemo(() => ({ theme, toggleTheme }), [theme, toggleTheme]);
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
-      {children}
-    </ThemeContext.Provider>
+    <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
   );
 };
