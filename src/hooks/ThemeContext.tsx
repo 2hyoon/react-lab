@@ -7,6 +7,7 @@ import {
   useContext,
   useCallback,
   useMemo,
+  useRef,
 } from "react";
 import { Theme } from "@/src/types/type";
 import { ThemeContextType } from "@/src/types/interface";
@@ -26,35 +27,37 @@ interface ThemeProviderProps {
 }
 
 export const ThemeProvider = ({ children }: ThemeProviderProps) => {
-  // Always start with LIGHT so server and client first paint match (avoids hydration error).
+  // Start LIGHT for a deterministic server render; the pre-hydration script
+  // sets the real class on <body>, and the effect below adopts it after mount.
   const [theme, setTheme] = useState<Theme>(Theme.LIGHT);
 
-  // After mount, sync theme from localStorage or system preference.
+  // Adopt the theme the pre-hydration script already applied to <body>,
+  // so React state matches the DOM instead of re-deciding it.
   useEffect(() => {
-    // Left untyped on purpose: the comparison below narrows string | null to Theme,
-    // so an `as Theme` cast here would assert before the value is actually checked.
-    const storedTheme = window.localStorage.getItem("theme");
-    if (storedTheme === Theme.DARK || storedTheme === Theme.LIGHT) {
-      // SSR theme sync must run after mount, so setState here is intentional.
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setTheme(storedTheme);
-      return;
-    }
-    const prefersDark = window.matchMedia(
-      "(prefers-color-scheme: dark)",
-    ).matches;
-    setTheme(prefersDark ? Theme.DARK : Theme.LIGHT);
+    const isDark = document.body.classList.contains("dark");
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setTheme(isDark ? Theme.DARK : Theme.LIGHT);
   }, []);
 
+  const isMounted = useRef(false);
+
   useEffect(() => {
-    const root = window.document.body;
+    // Skip the first run: the pre-hydration script already set the DOM class and
+    // localStorage. Only react to actual theme changes (toggles) after mount,
+    // otherwise this would overwrite the script's result with the initial LIGHT.
+    if (!isMounted.current) {
+      isMounted.current = true;
+      return;
+    }
+
+    const body = window.document.body;
 
     if (theme === Theme.DARK) {
-      root.classList.add("dark");
-      root.classList.remove("light");
+      body.classList.add("dark");
+      body.classList.remove("light");
     } else {
-      root.classList.add("light");
-      root.classList.remove("dark");
+      body.classList.add("light");
+      body.classList.remove("dark");
     }
 
     localStorage.setItem("theme", theme);
