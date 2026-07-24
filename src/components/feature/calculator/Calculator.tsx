@@ -31,12 +31,23 @@ const initialState: State = {
 
 function calculate(a: number, b: number, op: Operator): number {
   switch (op) {
-    case "+": return a + b;
-    case "-": return a - b;
-    case "*": return a * b;
-    case "/": return b === 0 ? NaN : a / b;
-    default:  return b;
+    case "+":
+      return a + b;
+    case "-":
+      return a - b;
+    case "*":
+      return a * b;
+    case "/":
+      return b === 0 ? NaN : a / b;
+    default:
+      return b;
   }
+}
+
+// Trim floating-point noise (e.g. 0.1 + 0.2 -> "0.3") by rounding to 12
+// significant digits, then dropping trailing zeros via Number().
+function formatResult(value: number): string {
+  return String(Number(value.toPrecision(12)));
 }
 
 function reducer(state: State, action: Action): State {
@@ -50,11 +61,18 @@ function reducer(state: State, action: Action): State {
 
     case "INPUT_DIGIT":
       if (state.waitingForOperand) {
-        return { ...state, displayValue: action.digit, waitingForOperand: false };
+        return {
+          ...state,
+          displayValue: action.digit,
+          waitingForOperand: false,
+        };
       }
       return {
         ...state,
-        displayValue: state.displayValue === "0" ? action.digit : state.displayValue + action.digit,
+        displayValue:
+          state.displayValue === "0"
+            ? action.digit
+            : state.displayValue + action.digit,
       };
 
     case "INPUT_DECIMAL":
@@ -79,13 +97,28 @@ function reducer(state: State, action: Action): State {
     case "PERFORM_OPERATION": {
       const inputValue = parseFloat(state.displayValue);
       if (state.previousValue === null) {
-        return { ...state, previousValue: inputValue, operator: action.operator, waitingForOperand: true };
-      }
-      if (state.operator) {
-        const result = calculate(state.previousValue, inputValue, state.operator);
         return {
           ...state,
-          displayValue: String(result),
+          previousValue: inputValue,
+          operator: action.operator,
+          waitingForOperand: true,
+        };
+      }
+      if (state.waitingForOperand) {
+        return {
+          ...state,
+          operator: action.operator,
+        };
+      }
+      if (state.operator) {
+        const result = calculate(
+          state.previousValue,
+          inputValue,
+          state.operator,
+        );
+        return {
+          ...state,
+          displayValue: formatResult(result),
           previousValue: result,
           operator: action.operator,
           waitingForOperand: true,
@@ -99,7 +132,7 @@ function reducer(state: State, action: Action): State {
       if (!state.operator || state.previousValue === null) return state;
       const result = calculate(state.previousValue, inputValue, state.operator);
       return {
-        displayValue: Number.isNaN(result) ? "Error" : String(result),
+        displayValue: Number.isNaN(result) ? "Error" : formatResult(result),
         previousValue: null,
         operator: null,
         waitingForOperand: true,

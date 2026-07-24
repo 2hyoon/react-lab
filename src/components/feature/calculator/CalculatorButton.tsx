@@ -1,8 +1,8 @@
 "use client";
 
-import type { ButtonHTMLAttributes } from "react";
+import type { ComponentPropsWithoutRef } from "react";
 
-export interface CalculatorButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+export interface CalculatorButtonProps extends ComponentPropsWithoutRef<"button"> {
   label: string;
 }
 
