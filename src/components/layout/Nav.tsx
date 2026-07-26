@@ -19,6 +19,10 @@ const links = [
     name: "Counter",
     href: "/counter",
   },
+  {
+    name: "Github",
+    href: "/github",
+  },
 ];
 
 interface NavProps {
