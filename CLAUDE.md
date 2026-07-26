@@ -92,6 +92,7 @@ The sidebar (`#aside`) slides in/out via a CSS `left` transition defined in `glo
 
 ### Conventions
 
-- All Markdown files (`.md`) must be written in English.
+- All **committed** Markdown files (`.md`) must be written in English — `README.md`, `CLAUDE.md`, and anything else tracked by git.
+- Gitignored personal study notes are exempt and stay in Korean: `TODO.md`, `Learned.md`, `TODO-*.md` (per-item learning guides).
 - All git commit messages must be written in English.
 - Commit format: conventional commits — `feat`, `fix`, `refactor`, `chore`, etc. with a `(scope)` in parentheses.
