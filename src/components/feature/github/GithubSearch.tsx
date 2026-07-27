@@ -7,55 +7,44 @@ import {
   type FormEventHandler,
 } from "react";
 import Button from "@/src/components/ui/Button";
+import useFetch from "@/src/hooks/useFetch";
 import { GitHubUser } from "@/src/types/interface";
+import { FetchError } from "@/src/types/type";
+
+const getErrorMessage = (err: FetchError) => {
+  if (err.type === "network") {
+    return "Couldn't connect. Check your internet and try again.";
+  }
+
+  switch (err.status) {
+    case 403:
+      return "You've hit the rate limit. Try again in an hour.";
+    case 404:
+      return "No user found with that username.";
+    default:
+      return `Something went wrong (${err.status}).`;
+  }
+};
 
 const GithubSearch = () => {
   const [query, setQuery] = useState("");
-  const [data, setData] = useState<GitHubUser | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
   const inputId = useId();
+  const { data, isLoading, error, fetchData } = useFetch<GitHubUser>();
 
   const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     setQuery(e.currentTarget.value);
   };
 
-  const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
+  const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
 
     const trimmedQuery = query.trim();
 
     if (trimmedQuery === "") return;
 
-    setIsLoading(true);
-    setError(null);
-    setData(null);
+    const url = `https://api.github.com/users/${encodeURIComponent(trimmedQuery)}`;
 
-    try {
-      const response = await fetch(
-        `https://api.github.com/users/${trimmedQuery}`,
-      );
-      if (response.ok) {
-        const user: GitHubUser = await response.json();
-        setData(user);
-      } else {
-        switch (response.status) {
-          case 403:
-            setError("You've hit the rate limit. Try again in an hour.");
-            break;
-          case 404:
-            setError("No user found with that username.");
-            break;
-          default:
-            setError(`Something went wrong (${response.status}).`);
-        }
-      }
-    } catch (err) {
-      console.error(err);
-      setError("Network error. Check your connection and try again.");
-    } finally {
-      setIsLoading(false);
-    }
+    fetchData(url);
   };
 
   const profileCard = data && (
@@ -94,7 +83,7 @@ const GithubSearch = () => {
       </form>
       <div aria-live="polite" className="w-full max-w-md">
         {isLoading && <p className="text-muted">Searching…</p>}
-        {error && <p className="text-danger">{error}</p>}
+        {error && <p className="text-danger">{getErrorMessage(error)}</p>}
         {profileCard}
       </div>
     </>
