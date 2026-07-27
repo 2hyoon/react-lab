@@ -20,7 +20,7 @@ const links = [
     href: "/counter",
   },
   {
-    name: "Github",
+    name: "GitHub",
     href: "/github",
   },
 ];
