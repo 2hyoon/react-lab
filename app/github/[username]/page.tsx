@@ -1,4 +1,5 @@
 import { GitHubUser } from "@/src/types/interface";
+import { notFound } from "next/navigation";
 
 type Params = { username: string };
 
@@ -9,7 +10,16 @@ export default async function Page({ params }: { params: Promise<Params> }) {
   const response = await fetch(url, { cache: "no-store" });
 
   if (!response.ok) {
-    return <p>User not found.</p>;
+    switch (response.status) {
+      case 403:
+        throw new Error(
+          "You've hit GitHub's rate limit. Try again in an hour.",
+        );
+      case 404:
+        return notFound();
+      default:
+        throw new Error(`GitHub responded with ${response.status}.`);
+    }
   }
 
   const user: GitHubUser = await response.json();
