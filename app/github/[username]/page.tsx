@@ -1,7 +1,27 @@
 import { GitHubUser } from "@/src/types/interface";
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 
 type Params = { username: string };
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<Params>;
+}): Promise<Metadata> {
+  const { username } = await params;
+  const url = `https://api.github.com/users/${encodeURIComponent(username)}`;
+
+  const response = await fetch(url, { cache: "no-store" });
+
+  if (!response.ok) {
+    return { title: username };
+  }
+
+  const user: GitHubUser = await response.json();
+
+  return { title: user.name ?? user.login };
+}
 
 export default async function Page({ params }: { params: Promise<Params> }) {
   const { username } = await params;

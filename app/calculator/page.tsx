@@ -1,5 +1,7 @@
 import Calculator from "@/src/components/feature/calculator/Calculator";
 
+export const metadata = { title: "Calculator" };
+
 export default function Page() {
   return (
     <section

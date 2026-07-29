@@ -9,6 +9,7 @@ export interface AccordionItemData {
 export interface GitHubUser {
   id: number;
   login: string;
+  name: string | null;
   bio: string | null;
   avatar_url: string;
 }

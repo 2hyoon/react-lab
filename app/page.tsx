@@ -1,3 +1,5 @@
+export const metadata = { title: "React Lab" };
+
 export default function Home() {
   return (
     <section className="pt-7">

@@ -1,5 +1,7 @@
 import GithubSearch from "@/src/components/feature/github/GithubSearch";
 
+export const metadata = { title: "GitHub User Search" };
+
 export default function Page() {
   return (
     <section className="py-10 flex flex-col justify-center items-center gap-4">
@@ -9,7 +11,7 @@ export default function Page() {
           Search any GitHub username to see their profile.
         </p>
       </header>
-      <GithubSearch/>
+      <GithubSearch />
     </section>
   );
 }

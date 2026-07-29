@@ -1,6 +1,8 @@
 import Accordion from "@/src/components/ui/Accordion";
 import { AccordionItemData } from "@/src/types/interface";
 
+export const metadata = { title: "Accordion" };
+
 const accordionItems: AccordionItemData[] = [
   {
     id: "1",
