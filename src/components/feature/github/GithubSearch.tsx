@@ -6,11 +6,12 @@ import {
   type ChangeEventHandler,
   type FormEventHandler,
 } from "react";
-import Button from "@/src/components/ui/Button";
+import Link from "next/link";
 import useFetch from "@/src/hooks/useFetch";
+import Button from "@/src/components/ui/Button";
+import ProfileCard from "@/src/components/feature/github/ProfileCard";
 import { GitHubUser } from "@/src/types/interface";
 import { FetchError } from "@/src/types/type";
-import Link from "next/link";
 
 const getErrorMessage = (err: FetchError) => {
   if (err.type === "network") {
@@ -53,19 +54,10 @@ const GithubSearch = () => {
       href={`/github/${data.login}`}
       className="block rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background"
     >
-      <article className="flex items-center gap-4 p-4 rounded-lg bg-surface hover:bg-surface-hover border border-border transition-colors duration-200">
-        <img
-          src={data.avatar_url}
-          alt=""
-          width={64}
-          height={64}
-          className="w-16 h-16 rounded-full shrink-0"
-        />
-        <div className="min-w-0">
-          <h2 className="truncate">{data.login}</h2>
-          {data.bio && <p className="text-muted wrap-break-word">{data.bio}</p>}
-        </div>
-      </article>
+      <ProfileCard
+        user={data}
+        className="hover:bg-surface-hover transition-colors duration-200"
+      />
     </Link>
   );
 
