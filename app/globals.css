@@ -95,11 +95,11 @@ body {
 }
 
 @media (max-width: 1024px) {
-  body[data-sidebar="true"] #aside {
+  [data-sidebar="true"] #aside {
     left: 0;
   }
 
-  body[data-sidebar="false"] #aside {
+  [data-sidebar="false"] #aside {
     left: -12.5rem;
   }
 }
